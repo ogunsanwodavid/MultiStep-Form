@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-----------Important meta tags----------->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Advanced Frontend Mentor Challenge to build a responsive multi-step form">
+    <meta property="og:description" content="Advanced Frontend Mentor Challenge to build a responsive multi-step form">
+    <meta name="author" content="Ogunsanwo David Oluwadamilare">
+    <meta property="og:author" content="Ogunsanwo David Oluwadamilare">
+    <meta property="og:title" content="Multi-Step Form">
+
+    <!-----------Title---------->
+    <title>Multi-Step Form</title>
+
+    <!------------Favicon------------->
+    <link rel="shortcut icon" href="./assets/images/favicon-32x32.png" type="image/x-icon">
+
+    <!-------Linked stylesheets, fonts, icons and libraries------------>
+    <link rel="stylesheet" href="./dist/output.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    
+
+    <!--Added styles-->
+    <style>
+        body{
+            font-family: 'Ubuntu' , sans-serif;
+        }
+
+        #sidebar{
+            background-image: url(./assets/images/bg-sidebar-mobile.svg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .active{
+            background-color: hsl(231, 100%, 99%);
+            color: #000;
+        }
+
+        .active-plantype{
+            color: hsl(213, 96%, 18%) !important;
+        }
+
+
+        .plan-select{
+            border-color: hsl(213, 96%, 18%);
+            background-color:hsl(217, 100%, 97%);
+        }
+
+        .addon-select{
+            border-color: hsl(213, 96%, 18%);
+            background-color:hsl(217, 100%, 97%);
+        }
+
+        @media (min-width: 820px) {
+            #sidebar{
+                background-image: url(./assets/images/bg-sidebar-desktop.svg);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-magnolia md:h-[100vh] md:w-[100vw] md:flex md:items-center md:justify-center">
+    <div class="flex flex-col w-full md:flex-row md:min-h-[500px] md:max-w-[850px] md:pr-24 md:bg-white md:space-x-20 md:items-center md:rounded-2xl md:p-4">
+        <!--The top controls in mobile and the sidebars in desktop-->
+        <div id="sidebar" class="flex justify-center space-x-3 w-full p-4 pt-8 pb-20 md:space-x-0 md:p-8 md:min-h-[500px] md:max-w-[250px] md:flex-col md:justify-start md:space-y-8 md:rounded-2xl">
+            <div class="flex items-center space-x-2">
+                <div class="sb-ctrl flex items-center justify-center h-8 w-8 rounded-full border-[1.5px] border-white text-white text-sm font-medium active">1</div>
+
+                <div class="hidden flex-col md:flex">
+                    <p class="text-xs text-pastel-blue">STEP 1</p>
+                    <p class="text-sm text-white font-medium">YOUR INFO</P>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-2">
+                <div class="sb-ctrl flex items-center justify-center h-8 w-8 rounded-full border-[1.5px] border-white text-white text-sm font-medium">2</div>
+
+                <div class="hidden flex-col md:flex">
+                    <p class="text-xs text-pastel-blue">STEP 2</p>
+                    <p class="text-sm text-white font-medium">SELECT PLAN</P>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2">
+                <div class="sb-ctrl flex items-center justify-center h-8 w-8 rounded-full border-[1.5px] border-white text-white text-sm font-medium">3</div>
+
+                <div class="hidden flex-col md:flex">
+                    <p class="text-xs text-pastel-blue">STEP 3</p>
+                    <p class="text-sm text-white font-medium">ADD-ONS</P>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2">
+                <div class="sb-ctrl flex items-center justify-center h-8 w-8 rounded-full border-[1.5px] border-white text-white text-sm font-medium">4</div>
+
+                <div class="hidden flex-col md:flex">
+                    <p class="text-xs text-pastel-blue">STEP 4</p>
+                    <p class="text-sm text-white font-medium">SUMMARY</P>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col w-full justify-between md:min-h-[500px] py-12">
+            <div class="flex flex-col px-4 mb-14 md:p-0 md:mb-0">
+                <!--Personal Information: step 1-->
+                <div id="personal-info" class="step flex flex-col w-full bg-white rounded-2xl p-4 py-8 -translate-y-14 md:-translate-y-0 md:p-0">
+                    <h1 class="text-xl text-marine-blue font-bold ">Personal info</h1>
+                    <p class="text-sm text-cool-gray mt-2">Please provide your name, email address and phone number.</p>
+
+
+                    <form >
+                        <label class="block text-xs text-marine-blue font-medium mt-4" for="name">Name</label>
+                        <div class="w-full relative flex flex-col mt-2">
+                            <input id="name" type="text" class="text-input w-full  border-[1px] border-cool-gray p-2 pl-4 text-cool-gray text-sm font-medium rounded-lg" name="name" placeholder="e.g. Stephen King">
+                            <div class="error absolute right-0 top-0 text-xs -mt-6 text-strawberry-red font-medium"></div>
+                        </div>
+
+                        <label class="block text-xs text-marine-blue font-medium mt-4" for="name">Email Address</label>
+                        <div class="w-full relative flex flex-col mt-2">
+                            <input type="text" id="email-input" class="text-input w-full  border-[1px] border-cool-gray p-2 pl-4 text-cool-gray text-sm font-medium rounded-lg" name="email" placeholder="e.g. stephenking@lorem.com">
+                            <div class="error absolute right-0 top-0 text-xs -mt-6 text-strawberry-red font-medium"></div>
+                        </div>
+
+                        <label class="block text-xs text-marine-blue font-medium mt-4" for="name">Phone Number</label>
+                        <div class="w-full relative flex flex-col mt-2">
+                            <input type="text" id="phone" class="text-input w-full  border-[1px] border-cool-gray p-2 pl-4 text-cool-gray text-sm font-medium rounded-lg" name="phone" placeholder="e.g. +1 234 567 890">
+                            <div class="error absolute right-0 top-0 text-xs -mt-6 text-strawberry-red font-medium"></div>
+                        </div>
+
+                        
+                    </form>
+                </div>
+
+                <!--Select Plan: step 2-->
+                <div id="select-plan" class="step hidden flex-col w-full bg-white rounded-2xl p-4 py-8 -translate-y-14 md:-translate-y-0 md:p-0">
+                    <h1 class="text-xl text-marine-blue font-bold ">Select Your Plan</h1>
+                    <p class="text-sm text-cool-gray mt-2">You have the option of monthly or yearly billing.</p>
+
+                    <div class="flex flex-col mt-5 space-y-4 md:flex-row md:space-y-0 md:space-x-2">
+                        <div class="plan monthly-plan plan-select flex w-full space-x-4 border-[1px] border-light-gray p-3 rounded-lg md:space-x-0 md:flex-col md:space-y-14">
+                            <img src="./assets/images/icon-arcade.svg" class="h-7 md:w-max" alt="">
+
+                            <div class="flex flex-col space-y-1">
+                                <h2 class="text-sm text-marine-blue font-bold ">Arcade</h2>
+                                <div class="plan-price text-xs text-cool-gray">$9/mo</div>
+                                <div class="month-free hidden text-xs text-marine-blue font-bold">2 months free</div>
+                            </div>
+                        </div>
+
+                        <div class="plan monthly-plan flex w-full space-x-4 border-[1px] border-light-gray p-3 rounded-lg md:space-x-0 md:flex-col md:space-y-14">
+                            <img src="./assets/images/icon-advanced.svg" class="h-7 md:w-max" alt="">
+
+                            <div class="flex flex-col space-y-1">
+                                <h2 class="text-sm text-marine-blue font-bold ">Advanced</h2>
+                                <div class="plan-price text-xs text-cool-gray">$12/mo</div>
+                                <div class="month-free hidden text-xs text-marine-blue font-bold">2 months free</div>
+                            </div>
+                        </div>
+
+                        <div class="plan monthly-plan flex w-full space-x-4 border-[1px] border-light-gray p-3 rounded-lg md:space-x-0 md:flex-col md:space-y-14">
+                            <img src="./assets/images/icon-pro.svg" class="h-7 md:w-max" alt="">
+
+                            <div class="flex flex-col space-y-1">
+                                <h2 class="text-sm text-marine-blue font-bold ">Pro</h2>
+                                <div class="plan-price text-xs text-cool-gray">$15/mo</div>
+                                <div class="month-free hidden text-xs text-marine-blue font-bold">2 months free</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="flex items-center justify-center w-full mt-8 p-4 space-x-3 md:bg-magnolia  md:rounded-md">
+                        <div id="monthly" class="text-sm font-bold text-cool-gray active-plantype">Monthly</div>
+
+                        <div id="toggler" class="flex items-center justify-start h-4 w-9 rounded-full bg-marine-blue p-[1px] cursor-pointer">
+                            <div id="toggle-ball" class="h-3 w-3 bg-white rounded-full"></div>
+                        </div>
+
+                        <div id="yearly" class="plan-type text-sm text-cool-gray font-bold">Yearly</div>
+                    </div>
+
+
+                    <script>
+                        //Plancode
+                        let plancode = 0;
+                        //Planmode is initially set to monthly payment method
+                        planmode = "monthly"
+
+                        const monthly  = document.getElementById("monthly")
+                        const yearly  = document.getElementById("yearly")
+                        const toggler = document.getElementById("toggler")
+                        const toggleBall = document.getElementById("toggle-ball")
+                        const plans = document.getElementsByClassName("plan")
+                        const planType = document.querySelectorAll("plan-type")
+                        const planPrice = document.getElementsByClassName("plan-price")
+                        const monthlyPrice = ["9" , "12" , "15"]
+                        const yearlyPrice = ["90" , "120" , "150"]
+                        const monthFree = document.getElementsByClassName("month-free")
+
+                        //This event listener listens for a click and create the little animation
+                        //to toggle between monthly and yearly payment plans 
+                        toggler.addEventListener("click" , function () {
+                            if(monthly.classList.contains("active-plantype")){
+                                monthly.classList.remove("active-plantype")
+                                yearly.classList.add("active-plantype")
+                                toggler.classList.remove("justify-start")
+                                toggler.classList.add("justify-end")
+                                planmode = "yearly"
+
+                                
+                                for (let i = 0; i < monthFree.length; i++) {
+                                    monthFree[i].style.display = "block"
+                                }
+
+                                for (let i = 0; i < planPrice.length; i++) {
+                                    planPrice[i].innerHTML = `$${yearlyPrice[i]}/yr`
+                                }
+
+                                for (let i = 0; i < plans.length; i++) {
+                                    plans[i].classList.remove("monthly-plan")
+                                    plans[i].classList.add("yearly-plan")
+                                }
+                            } else if(yearly.classList.contains("active-plantype")){
+                                yearly.classList.remove("active-plantype")
+                                monthly.classList.add("active-plantype")
+                                toggler.classList.remove("justify-end")
+                                toggler.classList.add("justify-start")
+                                planmode = "monthly"
+
+
+                                for (let i = 0; i < monthFree.length; i++) {
+                                    monthFree[i].style.display = "none"
+                                }
+
+                                for (let i = 0; i < planPrice.length; i++) {
+                                    planPrice[i].innerHTML = `$${monthlyPrice[i]}/mo`
+                                }
+
+                                for (let i = 0; i < plans.length; i++) {
+                                    plans[i].classList.remove("yearly-plan")
+                                    plans[i].classList.add("monthly-plan")
+                                }
+                            } 
+                        })
+
+                        //This for loop is used to achieve selecting only one type of plan at the same time
+                        //i.e only "Arcade", "Advanced" or "Pro"
+                        //The plans is formed into an array and we exclude all other elements except the clicked
+                        for (let i = 0; i < plans.length; i++){
+                            plans[i].addEventListener("click" , function(){
+                                excludedplans = Array.from(plans).filter(function (element) {
+                                    return element !== plans[i]
+                                })
+
+                                plans[i].classList.add("plan-select")
+
+                                for (let i = 0; i < excludedplans.length; i++) {
+                                    excludedplans[i].classList.remove("plan-select")
+                                }
+                            })
+                        }
+    
+                    </script>
+                </div>
+
+                <!--Select Addon: step 3-->
+                <div id="select-addon" class="step hidden flex-col w-full bg-white rounded-2xl p-4 py-8 -translate-y-14 md:-translate-y-0 md:p-0">
+                    <h1 class="text-xl text-marine-blue font-bold ">Pick add-ons</h1>
+                    <p class="text-sm text-cool-gray mt-2">Add-ons help ehance your gaming experience</p>
+
+                    
+                    <div class="flex flex-col mt-5 space-y-3">
+                        <div class="add-on flex items-center w-full space-x-4 border-[1px] border-light-gray p-3 rounded-lg">
+                            <input type="checkbox" class="checkbox">
+
+                            <div class="flex flex-col space-y-1">
+                                <h2 class="text-sm text-marine-blue font-bold ">Online service</h2>
+                                <div class=" text-xs text-cool-gray">Access to multiplayer games</div>
+                            </div>
+
+                            <div class="addon-price text-xs text-purplish-blue font-medium" style="margin-left: auto !important">+$1/mo</div>
+                        </div>
+
+                        <div class="add-on flex items-center w-full space-x-4 border-[1px] border-light-gray p-3 rounded-lg">
+                            <input type="checkbox" class="checkbox">
+
+                            <div class="flex flex-col space-y-1">
+                                <h2 class="text-sm text-marine-blue font-bold ">Larger storage</h2>
+                                <div class=" text-xs text-cool-gray">Extra 1TB of cloud save</div>
+                            </div>
+
+                            <div class="addon-price text-xs text-purplish-blue font-medium" style="margin-left: auto !important">+$2/mo</div>
+                        </div>
+
+                        <div class="add-on flex items-center w-full space-x-4 border-[1px] border-light-gray p-3 rounded-lg">
+                            <input type="checkbox" class="checkbox">
+
+                            <div class="flex flex-col space-y-1">
+                                <h2 class="text-sm text-marine-blue font-bold ">Customizable profile</h2>
+                                <div class=" text-xs text-cool-gray">Custom theme on your profile</div>
+                            </div>
+
+                            <div class="addon-price text-xs text-purplish-blue font-medium" style="margin-left: auto !important">+$2/mo</div>
+                        </div>
+
+
+                        <script>
+                            const addons= document.getElementsByClassName("add-on")
+                            const addonType = document.querySelectorAll("addon-type")
+                            const checkboxes = document.getElementsByClassName("checkbox")
+
+                            //This is used to make sure the checkboxes can be checked by just clicking on the parent div
+                            for (let i = 0; i < addons.length; i++){
+                            addons[i].addEventListener("click" , function(){
+                                if(checkboxes[i].checked == false){
+                                    addons[i].classList.add("addon-select")
+                                    checkboxes[i].checked = true
+                                }else if(checkboxes[i].checked == true){
+                                    addons[i].classList.remove("addon-select")
+                                    checkboxes[i].checked = false
+                                }
+                            });
+
+                            //and also clicking on the checkbox itself
+                            checkboxes[i].addEventListener("click" , function(){
+                                if(checkboxes[i].checked == false){
+                                    addons[i].classList.add("addon-select")
+                                    checkboxes[i].checked = true
+                                }else if(checkboxes[i].checked == true){
+                                    addons[i].classList.remove("addon-select")
+                                    checkboxes[i].checked = false
+                                }
+                            })
+
+                        }
+                        </script>
+                    </div>
+                </div>
+
+                <!--Final step: step 4-->
+                <div id="finish-up" class="step hidden flex-col w-full bg-white rounded-2xl p-4 py-8 -translate-y-14 md:-translate-y-0 md:p-0">
+                    <h1 class="text-xl text-marine-blue font-bold ">Finishing Up</h1>
+                    <p class="text-sm text-cool-gray mt-2">Double-check everything looks OK before confirming</p>
+
+                    
+                    <div class="flex flex-col mt-5 space-y-3">
+                        <div class="flex flex-col w-full bg-magnolia p-2 rounded-xl">
+                            <div class="flex items-center justify-between pb-4 border-b-[1px] border-cool-gray">
+                                <div class="flex flex-col space-y-1">
+                                    <div class="text-sm text-marine-blue font-bold"><span id="plantype-name"></span> (<span id="plantype-mode"></span>)</div>
+                                    <div class="w-max text-[0.8rem] text-cool-gray underline" onclick="changePlan()">Change</div>
+                                </div>
+
+                                <div id="plantype-price" class="text-sm text-marine-blue font-bold">
+                                    
+                                </div>
+                            </div>
+
+                            <div class="addon-total hidden items-center justify-between py-2">
+                                <div class="w-max text-[0.8rem] text-cool-gray">Online Service</div>
+
+                                <div class="addon-total-price text-sm text-cool-gray font-medium">
+                                    +$1/mo
+                                </div>
+                            </div>
+
+                            <div class="addon-total hidden items-center justify-between py-2">
+                                <div class="w-max text-[0.8rem] text-cool-gray">Larger Storage</div>
+
+                                <div class="addon-total-price text-sm text-cool-gray font-medium">
+                                    +$2/mo
+                                </div>
+                            </div>
+
+                            <div class="addon-total hidden items-center justify-between py-2">
+                                <div class="w-max text-[0.8rem] text-cool-gray">Customizable profile</div>
+
+                                <div class="addon-total-price text-sm text-cool-gray font-medium">
+                                    +$3/mo
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-2">
+                            <div class="w-max text-[0.8rem] text-cool-gray">Total (per <span id="per-plan"></span>)</div>
+
+                            <div id="total" class="text-base text-purplish-blue font-medium">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Thank You message-->
+                <a href="./index.html">
+                    <div id="thank-you" class="hidden flex-col w-full bg-white rounded-2xl p-4 py-12 -translate-y-14 shadow-[0_3px_10px_rgb(0,0,0,0.2)] mt:50% md:translate-y-[50%] md:p-0 md:shadow-none">
+                        <img src="./assets/images/icon-thank-you.svg" class="mx-auto my-4 h-10 md:h-16" alt="">
+                        <h1 class="w-max mx-auto text-xl text-marine-blue font-bold md:text-2xl">Thank you!</h1>
+                        <p class="text-sm text-center text-cool-gray mt-2 leading-6">Thanks for confirming your subscription! We hope you have fun using our platform. If you ever need support,please feel free to email us at support@loremgaming.com</p>
+
+                        
+                    </div>
+                </a>
+            </div>
+
+            <!--Controls for the steps accordingly-->
+            <div id="controls" class="flex justify-between w-full bg-white px-4 py-6 md:p-0">
+            <!--GoBack and Confirm are initially hidden-->
+            <div id="go-back" class="hidden p-3 bg-transparent text-cool-gray text-sm rounded-lg font-medium" onclick="previousStep()">Go Back</div>
+
+            <div id="next-step-btn" class="p-3 px-5 bg-marine-blue text-white text-sm rounded-lg ml-auto cursor-pointer hover:bg-purplish-blue" onclick="nextStep()">Next Step</div>
+
+            <div id="confirm-btn" class="hidden p-3 px-6 bg-purplish-blue text-white text-sm rounded-lg ml-auto" onclick="confirmPlan()">Confirm</div>
+        </div>
+        </div>
+
+        
+        
+    </div>
+
+    <!--Scripts-->
+    <script>
+        
+        let valid = true
+        const sbCtrls = document.getElementsByClassName("sb-ctrl")
+        const inputs = document.getElementsByClassName("text-input")
+        const labels = document.getElementsByTagName("label")
+        const errors = document.getElementsByClassName("error")
+        const steps = document.getElementsByClassName("step");
+        const name = document.getElementById("name")
+        const phone = document.getElementById("phone")
+        const email = document.getElementById("email-input")
+        const goBack = document.getElementById("go-back")
+        const nextStepBtn = document.getElementById("next-step-btn")
+        const confirmBtn = document.getElementById("confirm-btn")
+        const addonPrices = document.getElementsByClassName("addon-price")
+        const monthlyaddonPrice = ["1" , "2" , "3"]
+        const yearlyaddonPrice = ["10" , "20" , "30"]
+        const validEmailpattern =  /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        const ctrls = document.getElementById("controls")
+        const thankYou = document.getElementById("thank-you")
+
+        //This allows only alphabets in the name input
+        name.addEventListener("input" , function() {
+            const validNamepattern =  /^[a-z]*$/;
+
+            if(!validNamepattern.test(name.value)){
+                name.value = name.value.replace(/[^a-z]/g, '');
+            }
+        })
+
+        //This allows only digits and the + symbol in the phone number input
+        phone.addEventListener("input" , function() {
+            const validPhonepattern =  /^[0-9+]*$/;
+
+            if(!validPhonepattern.test(phone.value)){
+                phone.value = phone.value.replace(/[^0-9+]/g, '');
+            }
+        })
+
+        //This function validates the form in step 1 and if all inputs are valid, proceeds to step 2
+        function validatePersonalInfo() {
+            //To ensure inputs are not empty
+            for (let i = 0; i < inputs.length; i++) {
+                if(inputs[i].value === ""){
+                    inputs[i].classList.add("border-strawberry-red");
+                    errors[i].innerHTML = "This field is required";
+                    valid = false
+                }else{
+                    inputs[i].classList.remove("border-strawberry-red");
+                    errors[i].innerHTML = "";
+                    valid = true
+                }
+            }
+
+            //To validate email pattern
+            if(validEmailpattern.test(email.value)){
+                valid = true
+                email.classList.remove("border-strawberry-red")
+                errors[1].innerHTML = ""
+            }else if(!validEmailpattern.test(email.value)){
+                valid = false
+                email.classList.add("border-strawberry-red")
+                errors[1].innerHTML = "Invalid email address"
+            }
+
+            //Check if the valid variable is still intact and then moves to the next step
+            if(valid){
+                sbCtrls[0].classList.remove("active")
+                sbCtrls[1].classList.add("active")
+                steps[0].style.display = "none"
+                steps[1].style.display = "flex"
+
+                goBack.style.display = "block"
+            }
+        }
+
+        //This function notes and stores information using some variables about the type of plan picked and then proceedsto step 3
+        function addPlan() {
+            for (let i = 0; i < plans.length; i++) {
+                if(plans[i].classList.contains("plan-select")){
+                    plancode = `${i}`
+                }
+            }
+
+            for (let i = 0; i < addons.length; i++) {
+                if(planmode == "monthly"){
+                    addonPrices[i].innerHTML = `+$${monthlyaddonPrice[i]}/mo`
+                }else if(planmode == "yearly"){
+                    addonPrices[i].innerHTML = `+$${yearlyaddonPrice[i]}/yr`
+                }
+            }
+
+
+            sbCtrls[1].classList.remove("active")
+            sbCtrls[2].classList.add("active")
+            steps[1].style.display = "none"
+            steps[2].style.display = "flex"
+
+        }
+
+        //This function notes and stores info about addons picked (if any) and proceeds to the final step, 4.
+        function pickAddon() {
+            const planTypeName = document.getElementById("plantype-name")
+            const planTypeMode = document.getElementById("plantype-mode")
+            const planTypePrice = document.getElementById("plantype-price")
+            const addonTotal = document.getElementsByClassName("addon-total")
+            const addonTotalPrice = document.getElementsByClassName('addon-total-price')
+            const calcTotal = document.getElementById("total")
+            const perPlan = document.getElementById("per-plan");
+            let totalPrice = 0;
+
+            //Template Literals are used to manipulate the output on the calculation table
+            //Plancode is changed from string to data so we can get information stored in the monthlyPrice
+            //and YearlyPrice arrays
+            if(planmode == "monthly"){
+                planTypeMode.innerHTML = "Monthly";
+                planTypePrice.innerHTML = `+$${monthlyPrice[Number(plancode)]}/mo`;
+                totalPrice += Number(monthlyPrice[Number(plancode)])
+            }else if(planmode == "yearly"){
+                planTypeMode.innerHTML = "Yearly";
+                planTypePrice.innerHTML = `+$${yearlyPrice[Number(plancode)]}/yr`;
+                totalPrice += Number(yearlyPrice[Number(plancode)])
+            }
+
+            //Decodes the info stored in the variable plancode
+            if(plancode == "0"){
+                planTypeName.innerHTML = 'Arcade'
+            }else if(plancode == "1"){
+                planTypeName.innerHTML = 'Advanced'
+            }else if(plancode == "2"){
+                planTypeName.innerHTML = 'Pro'
+            }
+
+            //This loops through all checkboxed, note which is checked and proceed to decode the info stored
+            for (let i = 0; i < checkboxes.length; i++) {
+                if(checkboxes[i].checked == true){
+                    addonTotal[i].style.display = "flex";
+
+                    if(planmode == "monthly"){
+                        addonTotalPrice[i].innerHTML = `+$${monthlyaddonPrice[i]}/mo`
+                        totalPrice += Number(monthlyaddonPrice[i])
+                    }else if(planmode == "yearly"){
+                        addonTotalPrice[i].innerHTML = `+$${yearlyaddonPrice[i]}/yr`
+                        totalPrice += Number(yearlyaddonPrice[i])
+                    }
+                }else if(checkboxes[i].checked == false){
+                    addonTotal[i].style.display = "none"
+                }                
+            }
+
+            //More template literals manipulation
+            if(planmode == "monthly"){
+                calcTotal.innerHTML = `+$${totalPrice}/mo`
+                perPlan.innerHTML = "month"
+            }else if(planmode == "yearly"){
+                calcTotal.innerHTML = `+$${totalPrice}/yr`
+                perPlan.innerHTML = "year"
+            }
+
+            sbCtrls[2].classList.remove("active")
+            sbCtrls[3].classList.add("active")
+            steps[2].style.display = "none"
+            steps[3].style.display = "flex"
+            nextStepBtn.style.display = "none"
+            confirmBtn.style.display = "block"
+        }
+
+
+        //This function is executed to go to the next step by checking for which step is active at the moment
+        //It diverges to other specific functions for each step
+        function nextStep() {
+            if(sbCtrls[0].classList.contains("active")){
+                validatePersonalInfo();
+            }else if(sbCtrls[1].classList.contains("active")){
+                addPlan();
+            }else if(sbCtrls[2].classList.contains("active")){
+                pickAddon();
+            }
+            
+        }
+
+        //This is the function executed to go a step back and it ensures the go-back, next-step and
+        //confirm buttons appear where necessary.
+        function previousStep(){
+            if(sbCtrls[1].classList.contains("active")){
+                sbCtrls[1].classList.remove("active")
+                sbCtrls[0].classList.add("active")
+                steps[1].style.display = "none"
+                steps[0].style.display = "flex"
+                goBack.style.display = "none"
+            }else if(sbCtrls[2].classList.contains("active")){
+                sbCtrls[2].classList.remove("active")
+                sbCtrls[1].classList.add("active")
+                steps[2].style.display = "none"
+                steps[1].style.display = "flex"
+            }else if(sbCtrls[3].classList.contains("active")){
+                sbCtrls[3].classList.remove("active")
+                sbCtrls[2].classList.add("active")
+                steps[3].style.display = "none"
+                steps[2].style.display = "flex"
+                nextStepBtn.style.display = "block"
+                confirmBtn.style.display = "none"
+            }
+        }
+
+        //This function is executed to change the payment plan after user has reached final step
+        function changePlan(){
+            sbCtrls[3].classList.remove("active")
+            sbCtrls[1].classList.add("active")
+            steps[3].style.display = "none"
+            steps[1].style.display = "block"
+            confirmBtn.style.display = "none"
+            nextStepBtn.style.display = "block"
+        }
+
+        //This function is executed to finally confirm payment plans and showase thank you to the user
+        function confirmPlan() {
+            for (let i = 0; i < steps.length; i++) {
+                steps[i].style.display = "none"
+                ctrls.style.display = "none"
+                thankYou.style.display = "flex"
+                confirmBtn.style.display = "none"
+            }
+        }
+
+    </script>
+</body>
